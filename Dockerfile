@@ -1,6 +1,6 @@
 FROM openjdk:17-jdk-alpine
-COPY build/libs/page-parser.jar /deployments/page-parser.jar
+COPY build/libs/page-parser.jar /deployments/categorize-api.jar
 USER 185
 ENV JAVA_OPTS="-Xmx512m"
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/deployments/page-parser.jar"]
+EXPOSE 8082
+ENTRYPOINT ["java","-jar","/deployments/categorize-api.jar"]
