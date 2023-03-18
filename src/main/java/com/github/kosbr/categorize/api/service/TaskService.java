@@ -31,6 +31,11 @@ public class TaskService {
 
     private final StatusConverter statusConverter;
 
+    /**
+     * Accept task to categorize URL to the system.
+     * @param request
+     * @return
+     */
     public AcceptTaskResponse acceptTask(CategorizeRequest request) {
         LOG.info("Task is going to be accepted " + request);
         Task task = new Task();
@@ -44,6 +49,11 @@ public class TaskService {
         return new AcceptTaskResponse(task.getId());
     }
 
+    /**
+     * Get the current status of task. It can be still processing or ready.
+     * @param id
+     * @return
+     */
     public CategorizeResult getResult(UUID id) {
         LOG.info("Getting task by id " + id);
         Optional<Task> maybeTask = repository.findById(id);
@@ -71,6 +81,13 @@ public class TaskService {
         return result;
     }
 
+    /**
+     * Saves the result from another service to the manager's database. Then we are able to display it to the client.
+     * @param taskId
+     * @param error
+     * @param categories
+     * @param success
+     */
     public void saveResult(UUID taskId, String error, String categories, boolean success) {
         LOG.info(String.format("Got results for task %s: success=%s", taskId, success));
         Optional<Task> maybeTask = repository.findById(taskId);

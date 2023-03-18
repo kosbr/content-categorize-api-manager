@@ -17,6 +17,10 @@ public class ResultEventHandler {
     private static final String DELIMITER = ",";
     private final TaskService taskService;
 
+    /**
+     * Handle the final result of categorization.
+     * @param payload
+     */
     public void handle(ResultEvent payload) {
         LOG.info("Result is ready: " + payload);
         List<String> categories = payload.getCategories();

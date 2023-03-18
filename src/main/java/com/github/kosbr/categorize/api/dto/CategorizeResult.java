@@ -4,6 +4,9 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 import lombok.Data;
 
+/**
+ * REST result for the client about categorization
+ */
 @Data
 public class CategorizeResult {
 
@@ -17,5 +20,6 @@ public class CategorizeResult {
 
     private CategorizeStatus status;
 
+    // todo better convert to List
     private String result;
 }

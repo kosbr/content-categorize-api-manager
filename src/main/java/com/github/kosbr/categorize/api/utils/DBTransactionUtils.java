@@ -5,6 +5,12 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 public class DBTransactionUtils {
 
+    /**
+     * Launches the code after current transaction is completed.
+     * Why do we need it?
+     * See usages.
+     * @param runnable
+     */
     public static void executeAfterTransactionCompleted(Runnable runnable) {
         if (TransactionSynchronizationManager.isActualTransactionActive()) {
             TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {

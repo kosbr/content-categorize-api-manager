@@ -19,7 +19,15 @@ public class ExternalEventRepository {
         this.streamBridge = streamBridge;
     }
 
+    /**
+     * Sends event to the rabbit. The consumer of this event must open the URL and read the text from the webpage.
+     * @param taskId
+     * @param url
+     */
     public void sendEventToParse(UUID taskId, String url) {
+        // this line is still inside transaction. I don't want the event to be sent now, because transaction may be
+        // rolled back, and I'll lose consistency.
+        // to be honest this is not a silver bullet, but in reduces probability of inconsistency.
         DBTransactionUtils.executeAfterTransactionCompleted(() -> {
             ParseTaskEvent event = new ParseTaskEvent();
             event.setUrl(url);
