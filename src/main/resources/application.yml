@@ -25,6 +25,29 @@ spring:
     url: jdbc:postgresql://localhost:5432/categorizer
     user: categorizer
     password: categorizer
+  cloud:
+    stream:
+      bindings:
+        resultChannel:
+          consumer:
+            concurrency: 2
+            maxAttempts: 3
+          group: result-queue
+          destination: result-exchange
+      rabbit:
+        bindings:
+          resultChannel:
+            consumer:
+              exchangeType: topic
+              autoBindDlq: true
+              deadLetterQueueName: result-queue.dlq
+              dlqDeadLetterExchange: result-dlq-exchange
+              republishToDlq: true
+              dlqTtl: 600000
+      function:
+        definition: resultChannelStreamFunction;
+        bindings:
+          resultChannelStreamFunction-in-0: resultChannel
 
 swagger.enabled: true
 
