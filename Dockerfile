@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-alpine
-COPY build/libs/page-parser.jar /deployments/categorize-api.jar
+COPY build/libs/categorize-api.jar /deployments/categorize-api.jar
 USER 185
 ENV JAVA_OPTS="-Xmx512m"
 EXPOSE 8082
