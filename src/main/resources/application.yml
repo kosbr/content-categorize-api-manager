@@ -1,0 +1,32 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/categorizer
+    username: categorizer
+    password: categorizer
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 30
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        order_inserts: true
+        generate_statistics: false
+  flyway:
+    schemas: public
+    outOfOrder: true
+    baselineOnMigrate: true
+    baselineVersion: 1.0.0
+    cleanDisabled: false
+    locations:
+      - 'classpath:db/migration'
+    url: jdbc:postgresql://localhost:5432/categorizer
+    user: categorizer
+    password: categorizer
+
+swagger.enabled: true
+
+configuration:
+  content-exchange: content-exchange
